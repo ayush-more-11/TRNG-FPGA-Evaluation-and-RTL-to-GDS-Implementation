@@ -1,4 +1,0 @@
-%Error: /openlane/designs/trng_top/paper_rerun/design/src/trng_tech_cells.v:54:40: Can't resolve module reference: 'sky130_fd_sc_hd__inv_1'
-   54 |     (* keep *) sky130_fd_sc_hd__inv_1  u_cell (.A(a), .Y(y));
-      |                                        ^~~~~~
-%Error: Exiting due to 1 error(s)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OS/editor files
 .DS_Store
 *.swp
@@ -41,3 +42,55 @@ openlane_runs/
 !.env.example
 *.key
 *.pem
+=======
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Vivado generated files
+.Xil/
+*.jou
+*.str
+*.wdb
+*.vcd
+*.vpd
+*.pb
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.gen/
+*.ip_user_files/
+*.bit
+*.ltx
+
+# OpenLane / OpenROAD / simulation work products
+**/runs/
+**/tmp/
+**/obj_dir/
+**/build/
+*.odb
+*.tmp
+*.bak
+
+# Raw TRNG captures and local datasets (never commit entropy captures by default)
+*.bin
+*.raw
+*.dat
+
+# Logs are ignored by default; explicitly curated compile logs remain tracked.
+*.log
+!openlane/reports/icarus_compile.log
+!openlane/reports/verilator_compile.log
+>>>>>>> 2a71bc8 (Restructured Repo)

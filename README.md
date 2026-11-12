@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FPGA-Based Hardware True Random Number Generator
 
 ## Cryptographic and Cybersecurity Applications
@@ -129,3 +130,76 @@ Do not compare FPGA, OpenLane, and Cadence numbers without stating technology, s
 ## License
 
 No license file is currently provided. Treat RTL, reports, figures, and archives as project materials unless a separate license is supplied.
+=======
+# FPGA & ASIC Ring-Oscillator True Random Number Generator
+
+**An eight-ring-oscillator TRNG implemented in Verilog, with a Xilinx FPGA version and a SkyWater 130 nm OpenLane implementation, plus physical-design evidence and NIST SP 800-22 evaluation.**
+
+![RO-TRNG pipeline](docs/figures/fig_pipeline.png)
+
+## Design
+
+The core pipeline is **ring-oscillator bank → XOR → two-flop sampler → health checks → Von Neumann corrector → byte packer → UART (8-N-1)**.
+
+- **FPGA RTL** (`rtl/fpga/`): Xilinx-oriented implementation. The FPGA version includes the RCT health check and Von Neumann correction.
+- **ASIC RTL** (`openlane/src/`): Sky130 technology wrappers, reset synchronizer, RCT and APT health checks, Von Neumann correction and UART. The OpenLane configuration and timing constraints are alongside the source.
+- **Verification** (`verification/`): separate functional testbenches for the FPGA and ASIC variants.
+
+The simulation-only ring-oscillator models exercise digital functionality; they do **not** model physical entropy and must not be used as evidence of randomness.
+
+## Results at a glance
+
+| Flow | Selected reported results |
+|---|---|
+| Vivado FPGA | WNS **+2.858 ns**, WHS **+0.106 ns**; estimated on-chip power **73 mW** |
+| OpenLane / Sky130 | Final extracted setup slack **+5.86 ns**, hold slack **+0.29 ns**; estimated power **1.34 mW**; Magic DRC count **0**, LVS errors **0** |
+| Cadence Innovus / 90 nm | Reported setup-path slack **+6.009 ns**; estimated post-route power **0.372 mW**; **679** instances |
+| NIST SP 800-22 | **55 × 1,000,000-bit** sequences (**55 Mbit** total); one subtest row is marked below the report's approximate passing-proportion threshold |
+
+These are tool reports, not silicon measurements. The 100 MHz OpenLane clock is a design constraint, not a demonstrated maximum operating frequency. The OpenLane area report has custom-wrapper area-accounting limitations. Cadence does not include DRC/LVS or hold reports, and its reported area unit is unspecified; do not compare its values directly with Sky130 or FPGA results.
+
+The NIST sequences are consecutive streams from one capture session, not 55 independent entropy-source experiments. The raw bitstream is not included. The report contains one proportion-flagged row (**51/55**); therefore this project does not claim that every NIST subtest passed or that statistical testing proves cryptographic security.
+
+## Repository map
+
+```text
+rtl/fpga/                 FPGA RTL
+verification/fpga/        FPGA testbench
+verification/asic/        ASIC/OpenLane testbench
+openlane/
+  src/                    ASIC RTL and technology wrappers
+  config.json             OpenLane configuration
+  constraints/            SDC timing constraints
+  reports/                Selected synthesis, timing, power and signoff reports
+  physical/               Final GDS, LEF, DEF, SDF, SPEF and post-layout netlist
+results/
+  vivado/                 FPGA reports and selected screenshots
+  openlane/               OpenLane evidence screenshots
+  cadence/                Innovus summary and layout/simulation screenshots
+  nist/                   NIST SP 800-22 summary
+ docs/figures/             Architecture and timing diagrams
+```
+
+## Functional simulation
+
+Run from the repository root with Icarus Verilog installed:
+
+```bash
+# FPGA behavioral testbench
+mkdir -p build
+iverilog -g2012 -s tb_trng -o build/fpga_tb rtl/fpga/trng_top.v verification/fpga/tb_trng.v
+vvp build/fpga_tb
+
+# ASIC behavioral testbench (simulation-only RO model)
+iverilog -g2012 -DTRNG_BEHAV_SIM -s tb_trng_top -o build/asic_tb \
+  openlane/src/trng_tech_cells.v openlane/src/trng_top.v verification/asic/tb_trng_top_rtl.v
+vvp build/asic_tb
+```
+
+For physical implementation, use `openlane/` as the design directory with the Sky130A PDK and the supplied `config.json`. The checked-in compile logs are retained as evidence: the captured Icarus invocation could not find `iverilog`, and the captured Verilator build stopped because its configured `g++` path was missing. Re-run these checks in a configured local environment before relying on them.
+
+## Figures and reports
+
+- [Pipeline](docs/figures/fig_pipeline.pdf) · [RO sampler](docs/figures/fig_ro_sampler.pdf) · [Von Neumann correction](docs/figures/fig_vonneumann.pdf) · [Sampling/UART timing](docs/figures/fig_timing.pdf)
+- Detailed reports and screenshots are grouped by tool under `results/`; final OpenLane physical outputs are under `openlane/physical/`.
+>>>>>>> 2a71bc8 (Restructured Repo)
