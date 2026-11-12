@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # FPGA-Based Hardware True Random Number Generator
 
 ## Cryptographic and Cybersecurity Applications
