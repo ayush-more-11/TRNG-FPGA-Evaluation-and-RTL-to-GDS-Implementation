@@ -202,4 +202,4 @@ For physical implementation, use `openlane/` as the design directory with the Sk
 
 - [Pipeline](docs/figures/fig_pipeline.pdf) · [RO sampler](docs/figures/fig_ro_sampler.pdf) · [Von Neumann correction](docs/figures/fig_vonneumann.pdf) · [Sampling/UART timing](docs/figures/fig_timing.pdf)
 - Detailed reports and screenshots are grouped by tool under `results/`; final OpenLane physical outputs are under `openlane/physical/`.
->>>>>>> 2a71bc8 (Restructured Repo)
+
