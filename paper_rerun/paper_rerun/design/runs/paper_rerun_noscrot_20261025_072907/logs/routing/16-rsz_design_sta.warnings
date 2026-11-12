@@ -1,0 +1,19 @@
+[WARNING GRT-0026] Missing route to pin _0722_/Y.
+[WARNING GRT-0026] Missing route to pin _0618_/Y.
+[WARNING GRT-0026] Missing route to pin _0654_/B.
+[WARNING GRT-0026] Missing route to pin _0667_/B.
+[WARNING GRT-0026] Missing route to pin _0676_/X.
+[WARNING GRT-0026] Missing route to pin _0722_/B.
+[WARNING GRT-0026] Missing route to pin _0722_/A.
+[WARNING GRT-0026] Missing route to pin _0776_/B_N.
+[WARNING GRT-0026] Missing route to pin _0820_/X.
+[WARNING GRT-0026] Missing route to pin _0938_/B.
+[WARNING GRT-0026] Missing route to pin _0938_/A.
+[WARNING GRT-0026] Missing route to pin _1140_/X.
+[WARNING GRT-0026] Missing route to pin _1146_/X.
+[WARNING GRT-0026] Missing route to pin _1146_/A2.
+[WARNING GRT-0026] Missing route to pin _1146_/B1.
+[WARNING GRT-0026] Missing route to pin _0820_/A.
+Warning: There is 1 unconstrained endpoint.
+Warning: There are 8 combinational loops in the design.
+[WARNING] Did not save OpenROAD database!

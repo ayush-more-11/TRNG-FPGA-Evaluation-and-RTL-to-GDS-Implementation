@@ -1,0 +1,302 @@
+NIST SP 800-22 TESTING SUMMARY
+==============================
+Archive analyzed: NIST_report.zip
+Primary evidence files: collection_summary.json, SHA256_manifest.txt, TRNG_Terminal.txt, TRNG_Terminal_Op.txt
+
+1. EXECUTIVE SUMMARY
+--------------------
+- The captured NIST Statistical Test Suite (STS) run completed for 55 binary bitstreams, each 1,000,000 bits, or 55,000,000 bits total (6,875,000 bytes).
+- The STS command used ./assess 1000000, selected user-provided input, ran all statistical tests on each sequence, selected binary input format, and used 55 streams.
+- The input was transformed by reversing the bit order within every byte into trng_nist_55streams_msb_first.bin; the transformed file remained 6,875,000 bytes and was the file named by finalAnalysisReport.txt.
+- The captured final table contains 188 result rows across the 15 NIST SP 800-22 test families (some families expand into many template/subtest rows).
+- Minimum and maximum reported uniformity p-values across the 188 rows are 0.007160 and 0.994250. One row has p = 0.007160 (< 0.01); the terminal output does not mark this row with the proportion-failure asterisk. The one row marked with an asterisk is a NonOverlappingTemplate row with proportion 51/55, below the report's approximate threshold of 52/55.
+- Important methodology limitation from collection_summary.json: the 55 sequences are consecutive streams from one hardware capture session, not 55 independent physical entropy-source experiments.
+- The ZIP does not contain the actual combined binary data or the 55 individual stream files, only the collection metadata, hashes, and terminal captures. Hashes therefore cannot be recomputed against the binary dataset using this ZIP alone.
+
+2. DATA COLLECTION / FILE INTEGRITY
+-----------------------------------
+Field                         Reported value
+Collection completion         2026-10-09T14:28:15.496629 (collection_summary.json)
+UART port                     COM5
+UART baud rate                115200
+Number of streams             55
+Bits per stream               1,000,000
+Bytes per stream              125,000
+Total bits                    55,000,000
+Total bytes                   6,875,000 (6,875,000 decimal bytes)
+Combined input filename       trng_nist_55streams.bin
+Combined-file SHA-256         3bfc214268e9d204e1ce1ddb8715d99016884460d04659590fa558a342d94ce6
+Dataset path recorded         C:\Users\Ayush\TRNG_BB_Low_Sample_NIST_data\fresh_run_20261009_130645\trng_nist_55streams.bin
+Integrity manifest            55 per-stream SHA-256 entries plus the combined-file hash (SHA256_manifest.txt)
+
+The manifest and JSON agree on the combined-file hash. This is a recorded agreement in the log/metadata; the binary itself is absent from the ZIP, so an independent byte-for-byte hash recheck was not possible from the supplied archive.
+
+3. STS CONFIGURATION / EXPERIMENTAL CONDITIONS
+---------------------------------------------
+- Suite directory/version: sts-2.1.2 appears in the terminal commands; the executable is ./assess.
+- Command: ./assess 1000000.
+- Generator selection: choice 0, user-prescribed input file data/trng_nist_55streams_msb_first.bin.
+- Run all tests on each sequence: choice 1.
+- Number of bitstreams: 55.
+- Input format: choice 1, binary (each byte contains 8 data bits).
+- The capture script created trng_nist_55streams_msb_first.bin by reversing the order of the eight bits in each byte of trng_nist_55streams.bin. Output size recorded as 6,875,000 bytes.
+
+Explicit parameter overrides recorded in the terminal:
+Test                               Parameter
+Block Frequency                    block length M = 128
+NonOverlapping Template            block length m = 9
+Overlapping Template               block length m = 9
+Approximate Entropy                block length m = 10
+Serial                             block length m = 16
+Linear Complexity                  block length M = 500
+
+The log does not enumerate explicit overrides for the remaining tests; do not assert settings beyond the STS defaults unless confirmed from the original STS configuration or result directory.
+
+4. RESULTS AT A GLANCE
+----------------------
+- Full result rows in captured table: 188.
+- Test-family names represented: 15.
+- Reported uniformity-p range: 0.007160 to 0.994250.
+- Rows with uniformity p-value below 0.01: 1 (NonOverlappingTemplate, p = 0.007160, proportion = 54/55). This is a descriptive threshold only; the provided log does not declare 0.01 as its decision threshold.
+- Rows with a proportion-failure asterisk: 1 (NonOverlappingTemplate, p = 0.637119, proportion = 51/55).
+- The report states the approximate minimum pass count is 52 for sample size 55, and approximately 31 for the Random Excursions (Variant) test for sample size 34.
+- RandomExcursions proportions in the report range from 33/34 to 34/34; RandomExcursionsVariant ranges from 32/34 to 34/34. These meet the stated approximate minimum of 31/34.
+- Result interpretation: the STS table reports per-family uniformity p-values and the proportion of sequences passing each row/subtest. The p-value is not the p-value of one individual sequence. Do not collapse all 188 rows into a simple "all tests passed" statement: the table contains one row explicitly flagged for a low passing proportion.
+
+5. SUMMARY BY TEST FAMILY
+-------------------------
+Rows are the number of lines in the final uniformity/proportion table. P-value range is taken from those reported rows. Proportion range is the passing-sequence numerator/denominator as shown by STS. Asterisk count reflects a literal proportion-failure marker in the source report.
+
+Test family                     Rows   P-value range          Proportion range   * rows
+Frequency                         1   0.062821..0.062821   55/55 to 55/55       0
+BlockFrequency                    1   0.637119..0.637119   55/55 to 55/55       0
+CumulativeSums                    2   0.474986..0.897763   55/55 to 55/55       0
+Runs                              1   0.595549..0.595549   54/55 to 54/55       0
+LongestRun                        1   0.080519..0.080519   55/55 to 55/55       0
+Rank                              1   0.946308..0.946308   54/55 to 54/55       0
+FFT                               1   0.554420..0.554420   55/55 to 55/55       0
+NonOverlappingTemplate          148   0.007160..0.994250   51/55 to 55/55       1
+OverlappingTemplate               1   0.334538..0.334538   55/55 to 55/55       0
+Universal                         1   0.048716..0.048716   55/55 to 55/55       0
+ApproximateEntropy                1   0.304126..0.304126   54/55 to 54/55       0
+RandomExcursions                  8   0.043745..0.671779   33/34 to 34/34       0
+RandomExcursionsVariant          18   0.017912..0.949602   32/34 to 34/34       0
+Serial                            2   0.028817..0.514124   55/55 to 55/55       0
+LinearComplexity                  1   0.202268..0.202268   55/55 to 55/55       0
+
+6. EXACT INDIVIDUAL RESULT ROWS (SOURCE-LINE TRACEABLE)
+-----------------------------------------------------
+The following 188 records are reproduced from the report table in TRNG_Terminal.txt. C1-C10 are the STS bucket counts for the uniformity calculation; P-VALUE and PROPORTION are copied as printed. The source line number allows a direct check against the log. TRNG_Terminal_Op.txt contains the same test table; its differences from TRNG_Terminal.txt are only a minor typo in a later failed copy-command message and a trailing newline difference, not a second independent STS result set.
+
+SRC-LINE | RAW STS REPORT ROW (values and marker preserved)
+     245 |   6  11   6   3   9   4   5   2   2   7  0.062821     55/55      Frequency
+     246 |   3   6   5   8   2   8   5   6   6   6  0.637119     55/55      BlockFrequency
+     247 |   6   5   8   7   5   3   5   5   2   9  0.474986     55/55      CumulativeSums
+     248 |   6   6   7   6   7   5   5   2   5   6  0.897763     55/55      CumulativeSums
+     249 |   5   4   9   4   6   3   8   5   7   4  0.595549     54/55      Runs
+     250 |   7   5   3   2   7  11   6   2   8   4  0.080519     55/55      LongestRun
+     251 |   5   6   6   5   3   4   6   6   7   7  0.946308     54/55      Rank
+     252 |   5   7   6   6   6  10   4   3   4   4  0.554420     55/55      FFT
+     253 |   8   4   6   6   6   2   5   6   3   9  0.474986     53/55      NonOverlappingTemplate
+     254 |   2   3   7   5   5  11   6   6   4   6  0.249284     55/55      NonOverlappingTemplate
+     255 |   3   4  11   3   4   5   7   5   7   6  0.275709     55/55      NonOverlappingTemplate
+     256 |   4   6   4   3   7   6   8   9   3   5  0.514124     55/55      NonOverlappingTemplate
+     257 |   7   7   6   7   3   4  10   5   6   0  0.129620     55/55      NonOverlappingTemplate
+     258 |   7   3   2   7   3  10   6   4   8   5  0.202268     55/55      NonOverlappingTemplate
+     259 |   8   6   5   6   5   8   3   6   3   5  0.759756     54/55      NonOverlappingTemplate
+     260 |   3   5  10   6   8   2   7   7   3   4  0.202268     55/55      NonOverlappingTemplate
+     261 |   3   7   4   4   8   2  10   7   4   6  0.224821     55/55      NonOverlappingTemplate
+     262 |   4   7   9   1   4   4   7   9   7   3  0.145326     55/55      NonOverlappingTemplate
+     263 |   3   5   6   5   6   9   7   6   5   3  0.719747     55/55      NonOverlappingTemplate
+     264 |   3   7   4   8   5   8   7   4   3   6  0.595549     55/55      NonOverlappingTemplate
+     265 |   5   4   4  10   8   3   8   3   5   5  0.304126     55/55      NonOverlappingTemplate
+     266 |   5   5   5  10   6   4   5   4   5   6  0.759756     54/55      NonOverlappingTemplate
+     267 |   4   6  12   4   5   5   2   8   5   4  0.115387     54/55      NonOverlappingTemplate
+     268 |   5   8   8   5   3   2   5   5   9   5  0.401199     55/55      NonOverlappingTemplate
+     269 |   4   7   7   6   3   8   4   5   6   5  0.834308     55/55      NonOverlappingTemplate
+     270 |   9   2   5   6   5   5   4   6   6   7  0.678686     54/55      NonOverlappingTemplate
+     271 |   4   5   0   7   6   9   8   6   3   7  0.162606     55/55      NonOverlappingTemplate
+     272 |   7   8   2  10   2   8   3   8   2   5  0.042808     55/55      NonOverlappingTemplate
+     273 |   5   4   6   2   6   9   4   7   5   7  0.595549     54/55      NonOverlappingTemplate
+     274 |   4   7   3   5   2   5   9   5   7   8  0.401199     55/55      NonOverlappingTemplate
+     275 |   5   8   1   6   4   6   4  10   6   5  0.275709     55/55      NonOverlappingTemplate
+     276 |   5   5   4   5   5   8   8   5   5   5  0.924076     55/55      NonOverlappingTemplate
+     277 |   3   7   9   5   5   7   3   5   5   6  0.678686     54/55      NonOverlappingTemplate
+     278 |  10   3   6   3   5   6   8   3   6   5  0.366918     55/55      NonOverlappingTemplate
+     279 |   7   6   2   7   6   8   6   4   4   5  0.719747     53/55      NonOverlappingTemplate
+     280 |   5   7   5   5   2  11   2   9   4   5  0.090936     55/55      NonOverlappingTemplate
+     281 |   3   8   7   9   5   3   4   6   3   7  0.401199     55/55      NonOverlappingTemplate
+     282 |   6   6   5   3   4   7   5   8   3   8  0.678686     54/55      NonOverlappingTemplate
+     283 |   7   2   4   7   7   9   4   4   7   4  0.437274     54/55      NonOverlappingTemplate
+     284 |   7   6   3   5   1   6   3  10   7   7  0.181557     54/55      NonOverlappingTemplate
+     285 |   8   5   3   2   4   9   6   6   6   6  0.474986     54/55      NonOverlappingTemplate
+     286 |   7   9   3   4   7   3   4   4   7   7  0.474986     55/55      NonOverlappingTemplate
+     287 |   7   6   6   6   6   5   7   4   1   7  0.678686     54/55      NonOverlappingTemplate
+     288 |   3   6   8   5   4   4   7   3   7   8  0.595549     54/55      NonOverlappingTemplate
+     289 |   7   7   2   7   8   4   5   9   4   2  0.249284     54/55      NonOverlappingTemplate
+     290 |   6  11   8   2   7   5   2   4   6   4  0.115387     54/55      NonOverlappingTemplate
+     291 |   6   4   4   9   1   7   6   6   8   4  0.334538     54/55      NonOverlappingTemplate
+     292 |   7   4   7   4   6   2   7   8   5   5  0.678686     55/55      NonOverlappingTemplate
+     293 |   1   5   6   6   9   4   3   7   6   8  0.304126     54/55      NonOverlappingTemplate
+     294 |   8   4   5   4   6   8   7   4   4   5  0.798139     55/55      NonOverlappingTemplate
+     295 |   9   9   3   3   3   9   7   5   3   4  0.129620     55/55      NonOverlappingTemplate
+     296 |   5   8   5   7   5   1   7   7   6   4  0.554420     54/55      NonOverlappingTemplate
+     297 |   4   6   6   4   8   6   6   6   4   5  0.946308     54/55      NonOverlappingTemplate
+     298 |   7   8   2   5   5   5   7   4   7   5  0.719747     55/55      NonOverlappingTemplate
+     299 |   3   5   9   3   9   5   6   6   6   3  0.401199     54/55      NonOverlappingTemplate
+     300 |   3   5   5   8   7   7   5   7   3   5  0.759756     55/55      NonOverlappingTemplate
+     301 |   9   4   7   6   8   2   5   4   5   5  0.514124     53/55      NonOverlappingTemplate
+     302 |   9   3   4   3   6   5   4   8   7   6  0.514124     55/55      NonOverlappingTemplate
+     303 |   9   6   3   4   4   3   6   7   8   5  0.514124     54/55      NonOverlappingTemplate
+     304 |   7   8   8   3   8   9   1   2   3   6  0.062821     53/55      NonOverlappingTemplate
+     305 |   7   7   9   1   5   5   2   5   8   6  0.224821     54/55      NonOverlappingTemplate
+     306 |   7   8   7   4   7   6   3   4   4   5  0.759756     55/55      NonOverlappingTemplate
+     307 |   2   7   6   6   8   1  11   4   4   6  0.071177     55/55      NonOverlappingTemplate
+     308 |   4   8   6   3   4   7   7   6   4   6  0.798139     55/55      NonOverlappingTemplate
+     309 |   7   7   6   5   6   5   7   2   6   4  0.834308     54/55      NonOverlappingTemplate
+     310 |   6   7   7   5   3   5   2   7   4   9  0.474986     55/55      NonOverlappingTemplate
+     311 |   8   3   4   5   6   3   1  10   9   6  0.080519     53/55      NonOverlappingTemplate
+     312 |   6   3  11   2   2   5   7   4   8   7  0.080519     54/55      NonOverlappingTemplate
+     313 |   9   2   9   3   5   5   4   8   7   3  0.181557     54/55      NonOverlappingTemplate
+     314 |   5   4   8   8   6   5   5   1   4   9  0.304126     55/55      NonOverlappingTemplate
+     315 |   4   8   8   3   6   4   3   6   7   6  0.637119     55/55      NonOverlappingTemplate
+     316 |   7   6   9   5   3  10   4   5   4   2  0.202268     55/55      NonOverlappingTemplate
+     317 |   4   4   5   8   4   7   5   6   6   6  0.924076     55/55      NonOverlappingTemplate
+     318 |   9   6   5   4   4   4   4   4  10   5  0.401199     53/55      NonOverlappingTemplate
+     319 |   6  10   6   7   4   4   4   7   3   4  0.474986     55/55      NonOverlappingTemplate
+     320 |   2   6   4   8   3  11   5   5   4   7  0.162606     55/55      NonOverlappingTemplate
+     321 |   8  12   7   4   3   7   3   3   5   3  0.055361     55/55      NonOverlappingTemplate
+     322 |   7   8   3   5   2   4   7   3  11   5  0.115387     54/55      NonOverlappingTemplate
+     323 |   3   4   3   3   8   6   9   8   8   3  0.202268     55/55      NonOverlappingTemplate
+     324 |   5   6   6   7   4   3  10   1   6   7  0.249284     54/55      NonOverlappingTemplate
+     325 |   9   3   5  10   3   4   7   4   7   3  0.181557     54/55      NonOverlappingTemplate
+     326 |   5   4   3   6   3   9   4  10   7   4  0.249284     54/55      NonOverlappingTemplate
+     327 |   8   4   6   6   6   2   5   6   3   9  0.474986     53/55      NonOverlappingTemplate
+     328 |   3   6   4   4   8   6   7   8   6   3  0.637119     54/55      NonOverlappingTemplate
+     329 |   5   7   6   6   2   2   6   5   9   7  0.437274     55/55      NonOverlappingTemplate
+     330 |   3   9   4   6   8   6   2   3   3  11  0.048716     55/55      NonOverlappingTemplate
+     331 |   6  11   2   3   5  10   3   6   6   3  0.048716     55/55      NonOverlappingTemplate
+     332 |   5   7   6   2   3   8   9   3   5   7  0.334538     55/55      NonOverlappingTemplate
+     333 |   5   1   8   5   4   2   7   6   9   8  0.162606     55/55      NonOverlappingTemplate
+     334 |   6   6   6   3   7   7   6   5   6   3  0.897763     53/55      NonOverlappingTemplate
+     335 |   6   1   6   3   8   9   7   9   2   4  0.080519     54/55      NonOverlappingTemplate
+     336 |   7   6   5   7   4   1   6   4   6   9  0.437274     53/55      NonOverlappingTemplate
+     337 |   5   9   3   7   4   3   7   1   9   7  0.129620     55/55      NonOverlappingTemplate
+     338 |   4   6  11   3   5   7   3   6   5   5  0.334538     55/55      NonOverlappingTemplate
+     339 |   3   2   6   6   5   6   8   6   8   5  0.637119     55/55      NonOverlappingTemplate
+     340 |   6   7   5   6   5   6   5   4   5   6  0.994250     53/55      NonOverlappingTemplate
+     341 |   5   4   8  10   3   6   3   5   6   5  0.437274     55/55      NonOverlappingTemplate
+     342 |   6   5   3   2   5   8   9   4   5   8  0.366918     54/55      NonOverlappingTemplate
+     343 |   5   4   3   4   4   3   6  14   4   8  0.014550     55/55      NonOverlappingTemplate
+     344 |   7   5   6   5   7   5   6   5   4   5  0.987896     55/55      NonOverlappingTemplate
+     345 |   4   4  10   5   5   4   7   5   6   5  0.678686     55/55      NonOverlappingTemplate
+     346 |   7   6   5   2   6   3   5   2  11   8  0.102526     54/55      NonOverlappingTemplate
+     347 |   3   6   6   8   6   3   6   5   7   5  0.834308     55/55      NonOverlappingTemplate
+     348 |   4   7   4   8   4  11   5   3   3   6  0.202268     54/55      NonOverlappingTemplate
+     349 |   5   6  10   8   6   1   6   4   3   6  0.224821     53/55      NonOverlappingTemplate
+     350 |   6   5   5  11   5   3   6   4   4   6  0.437274     55/55      NonOverlappingTemplate
+     351 |   3   8   9   4   9   6   3   4   3   6  0.249284     55/55      NonOverlappingTemplate
+     352 |   5   5   5   5   7  10   7   1   5   5  0.366918     55/55      NonOverlappingTemplate
+     353 |   4   9   5   4   7   6   7   3   4   6  0.678686     54/55      NonOverlappingTemplate
+     354 |   3   1   8   5   8   9   5  10   4   2  0.037566     55/55      NonOverlappingTemplate
+     355 |   4   7   9   6   2   5   6   6   2   8  0.334538     55/55      NonOverlappingTemplate
+     356 |   3   4   3  11   8   9   3   3   6   5  0.071177     55/55      NonOverlappingTemplate
+     357 |   3   4   8   6   4  10   1   8   7   4  0.115387     55/55      NonOverlappingTemplate
+     358 |   5  10   7   8   6   4   0   5   5   5  0.162606     54/55      NonOverlappingTemplate
+     359 |   4   4   4   5   7  11   4   1   9   6  0.080519     55/55      NonOverlappingTemplate
+     360 |   6   6   4   6   6   5   8   5   5   4  0.964295     54/55      NonOverlappingTemplate
+     361 |   4  10   4   6   4   9   3   4   5   6  0.334538     54/55      NonOverlappingTemplate
+     362 |   3   8   9   3   5   8   4   2   4   9  0.129620     55/55      NonOverlappingTemplate
+     363 |   3   9   5   3   4  10   7   1   8   5  0.071177     55/55      NonOverlappingTemplate
+     364 |   3   6   7   7   8   5   2   5   6   6  0.678686     54/55      NonOverlappingTemplate
+     365 |   4   6   6   5   6  11   7   5   3   2  0.249284     54/55      NonOverlappingTemplate
+     366 |   4   5   5   7   7   6   5   6   6   4  0.978072     55/55      NonOverlappingTemplate
+     367 |   6   6   3   6   6  11   9   2   1   5  0.048716     55/55      NonOverlappingTemplate
+     368 |   9   4   8   1   2  11   5   5   7   3  0.025193     55/55      NonOverlappingTemplate
+     369 |   8   7   5   6   3   3   2   6   7   8  0.437274     52/55      NonOverlappingTemplate
+     370 |   6   1   4   6   8   8   4   4   5   9  0.275709     53/55      NonOverlappingTemplate
+     371 |   8   7   6   5   7   3   4   6   6   3  0.759756     54/55      NonOverlappingTemplate
+     372 |   8   3   8   9   4   5   5   3   3   7  0.334538     55/55      NonOverlappingTemplate
+     373 |   5   5   7   5   6   4   5   7   4   7  0.964295     55/55      NonOverlappingTemplate
+     374 |   6   6   9   5   5   9   3   0   5   7  0.145326     55/55      NonOverlappingTemplate
+     375 |   5   8   6   3   5   6   3  10   2   7  0.249284     53/55      NonOverlappingTemplate
+     376 |   6   7   2   8   8   5   2   4   5   8  0.334538     55/55      NonOverlappingTemplate
+     377 |   6   7   5   3   9   1   8   6   3   7  0.224821     55/55      NonOverlappingTemplate
+     378 |   4  11   7   5   5   1   3   5   8   6  0.115387     55/55      NonOverlappingTemplate
+     379 |  10   3   1   7   4   5   8   8   6   3  0.102526     55/55      NonOverlappingTemplate
+     380 |   9   4   7   3   5   4   6   7   4   6  0.678686     55/55      NonOverlappingTemplate
+     381 |   3   5   5   3   2   7   8   9   5   8  0.275709     55/55      NonOverlappingTemplate
+     382 |   3   6   3  12   4   2   5   6   8   6  0.071177     54/55      NonOverlappingTemplate
+     383 |   5   8   4   6   4   8   6   6   6   2  0.678686     55/55      NonOverlappingTemplate
+     384 |   8   6   3   4   6   6   8   5   3   6  0.719747     54/55      NonOverlappingTemplate
+     385 |   3   8   5   6   9   4   3   6   7   4  0.514124     55/55      NonOverlappingTemplate
+     386 |   6   2   7   8   5   5   1   5   8   8  0.249284     55/55      NonOverlappingTemplate
+     387 |   9   7   5   8   3   5   5   4   4   5  0.637119     51/55   *  NonOverlappingTemplate
+     388 |   6   4   6   5   6   6   5   9   4   4  0.867692     54/55      NonOverlappingTemplate
+     389 |   6   6   5   7   7   5   3   6   7   3  0.867692     53/55      NonOverlappingTemplate
+     390 |   2   7   5   5   3  10   5   7   4   7  0.334538     55/55      NonOverlappingTemplate
+     391 |   5  11   1   6   5   5   5   9   4   4  0.115387     55/55      NonOverlappingTemplate
+     392 |   6   8   6   4  10   4   4   3   3   7  0.334538     54/55      NonOverlappingTemplate
+     393 |   6  11   4   5   5   4   9   4   5   2  0.162606     54/55      NonOverlappingTemplate
+     394 |   3   4   5   6   5   8   5   6  11   2  0.202268     55/55      NonOverlappingTemplate
+     395 |   5   7   5   2   3   8   6   4   8   7  0.514124     55/55      NonOverlappingTemplate
+     396 |   8   4  11   8   2  10   3   1   3   5  0.007160     54/55      NonOverlappingTemplate
+     397 |  12   6   7   2   3   5   7   3   4   6  0.080519     55/55      NonOverlappingTemplate
+     398 |   5   4   7   7   6   6   4   9   2   5  0.595549     54/55      NonOverlappingTemplate
+     399 |   2   7   8   7   2   6   6   7   3   7  0.366918     55/55      NonOverlappingTemplate
+     400 |   5   4   3   6   3   9   5   9   7   4  0.401199     54/55      NonOverlappingTemplate
+     401 |   3   7   6   8   7   2   8   2   6   6  0.334538     55/55      OverlappingTemplate
+     402 |   4   4   6   5   5   8   4   3  13   3  0.048716     55/55      Universal
+     403 |   5   2  10   8   6   5   4   5   3   7  0.304126     54/55      ApproximateEntropy
+     404 |   2   9   2   5   3   3   3   2   2   3  0.100508     34/34      RandomExcursions
+     405 |   4   6   4   4   3   3   1   5   2   2  0.602458     34/34      RandomExcursions
+     406 |   4   5   5   4   3   8   3   0   1   1  0.043745     34/34      RandomExcursions
+     407 |   2   5   1   5   5   2   1   4   7   2  0.148094     34/34      RandomExcursions
+     408 |   7   3   2   4   3   3   2   4   4   2  0.602458     33/34      RandomExcursions
+     409 |   3   2   4   3   5   3   4   6   3   1  0.671779     34/34      RandomExcursions
+     410 |   1   4   5   5   5   0   3   5   5   1  0.178278     34/34      RandomExcursions
+     411 |   2   3   5   4   2   5   5   3   4   1  0.671779     34/34      RandomExcursions
+     412 |   7   3   2   3   5   1   2   4   2   5  0.299251     33/34      RandomExcursionsVariant
+     413 |   7   3   2   1   5   2   5   3   3   3  0.350485     33/34      RandomExcursionsVariant
+     414 |   7   2   0   5   5   3   1   4   3   4  0.148094     32/34      RandomExcursionsVariant
+     415 |   5   5   1   5   4   1   2   2   3   6  0.299251     33/34      RandomExcursionsVariant
+     416 |   4   4   3   2   3   4   7   2   0   5  0.253551     34/34      RandomExcursionsVariant
+     417 |   3   4   5   4   3   2   2   6   3   2  0.739918     34/34      RandomExcursionsVariant
+     418 |   5   3   4   4   6   2   3   2   3   2  0.739918     34/34      RandomExcursionsVariant
+     419 |   5   4   3   7   3   4   0   3   2   3  0.299251     34/34      RandomExcursionsVariant
+     420 |   5   5   5   4   3   4   0   1   4   3  0.407091     34/34      RandomExcursionsVariant
+     421 |   4   4   3   4   2   5   3   2   4   3  0.949602     34/34      RandomExcursionsVariant
+     422 |   5   3   6   2   5   1   4   3   4   1  0.407091     34/34      RandomExcursionsVariant
+     423 |   4   6   3   2   4   4   1   4   1   5  0.468595     34/34      RandomExcursionsVariant
+     424 |   3   3   2   6   5   4   4   2   2   3  0.739918     34/34      RandomExcursionsVariant
+     425 |   3   2   5   4   3   5   3   5   1   3  0.739918     34/34      RandomExcursionsVariant
+     426 |   4   2   3   1   4   6   3   3   5   3  0.671779     34/34      RandomExcursionsVariant
+     427 |   3   4   0   3   5   2   5   4   7   1  0.148094     34/34      RandomExcursionsVariant
+     428 |   4   2   3   3   2   2   5   3   5   5  0.804337     34/34      RandomExcursionsVariant
+     429 |   4   2   4   2   2   1   4   7   0   8  0.017912     33/34      RandomExcursionsVariant
+     430 |   7   7   9   4   5   4   4   2   7   6  0.514124     55/55      Serial
+     431 |   8   6   5  11   2   1   7   5   8   2  0.028817     55/55      Serial
+     432 |   9   3   2   9   6   8   3   5   6   4  0.202268     55/55      LinearComplexity
+
+7. RUN / PACKAGING ISSUES AND DATA GAPS
+--------------------------------------
+- The STS itself prints "Statistical Testing Complete!!!!!!!!!!!!" after selecting the 55 binary streams.
+- Later commands in the terminal tried to copy experiments/AlgorithmTesting and data/trng_nist_55streams_msb_first.bin from the wrong current directory. The logged cp commands failed with "cannot stat" and a subsequent cat of the intended NIST_STS_results path failed because the copy did not succeed. The full result table is nevertheless present earlier in the terminal capture.
+- The two terminal files are effectively duplicate captures, not evidence of two independent test runs.
+- Missing from ZIP: trng_nist_55streams.bin, trng_nist_55streams_msb_first.bin, the 55 individual_streams/*.bin files, and a separate finalAnalysisReport.txt file. Their hashes/paths and the table output are included, but the raw bitstreams are not.
+- The exact FPGA part number, clock configuration during acquisition, raw/conditioned data status, entropy-estimation method, and independent-capture repeatability are not provided in these NIST files.
+
+8. RESEARCH-PAPER REPORTING NOTES
+---------------------------------
+- State the sample size explicitly: 55 sequences x 1,000,000 bits = 55,000,000 bits total; they came from one capture session, not 55 independent hardware experiments.
+- State the exact input transformation: bit order was reversed within each byte, and STS analyzed the msb_first-named file.
+- Report both the per-sequence passing proportion and the family-level uniformity p-value. The table has 188 rows because NonOverlappingTemplate is expanded across many templates; this is not 188 independent high-level test families.
+- Highlight the single proportion-marked row (NonOverlappingTemplate, 51/55 vs approximate 52/55 minimum). Separately note the smallest uniformity p-value is 0.007160; avoid claiming a failure solely on a 0.01 cutoff unless the paper explicitly adopts that criterion.
+- Preserve the recorded SHA-256 and package the raw binary streams plus separate finalAnalysisReport.txt with the research artifacts before claiming reproducibility.
+
+9. SOURCE-FILE TRACEABILITY
+---------------------------
+- collection_summary.json: timestamp, COM5/115200 UART settings, stream sizes/counts, full-dataset hash, same-session caveat.
+- SHA256_manifest.txt: 55 per-stream hashes and combined-file SHA-256.
+- TRNG_Terminal.txt: conversion command, STS run configuration, test parameter overrides, 188-row result table, minimum passing-proportion statements, and later copy errors.
+- TRNG_Terminal_Op.txt: duplicate terminal capture with essentially identical STS table.

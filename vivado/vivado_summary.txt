@@ -1,0 +1,51 @@
+Vivado Report Summary — FPGA-Based TRNG
+The two Vivado screenshots provide the power estimation and static timing analysis (STA) results for the TRNG FPGA implementation.
+1. Power Analysis Summary
+Parameter	Reported value
+Total on-chip power	0.073 W (73 mW)
+Dynamic power	0.001 W (1 mW, 2%)
+Device static power	0.072 W (72 mW, 98%)
+Design power budget	Not specified
+Process corner	Typical
+Junction temperature	25.4 °C
+Ambient temperature	25.0 °C
+Thermal margin	59.6 °C (12.0 W)
+Effective thermal resistance (θJA)	4.9 °C/W
+Power supplied to off-chip devices	0 W
+Estimation confidence	Medium
+
+Dynamic power breakdown
+Component	Reported percentage
+Clocks	66%
+Signals	10%
+Logic	15%
+I/O	9%
+
+Interpretation: The estimated total on-chip power is 73 mW, dominated by device static power at approximately 72 mW. Dynamic power is reported as approximately 1 mW. Clock activity represents the largest share of the dynamic-power estimate.
+
+Important limitation: Vivado reports medium confidence. The screenshot does not establish whether the activity inputs came from simulation switching activity or vectorless estimation for this particular run. The power values are estimates, not measurements of power consumed by the physical FPGA board.
+
+Source: TRNG_vivado_power_rpt.png
+2. Design Timing Summary
+Timing parameter	Reported value
+Worst Negative Slack (WNS)	+2.858 ns
+Total Negative Slack (TNS)	0.000 ns
+Setup failing endpoints	0
+Setup endpoints analyzed	163
+Worst Hold Slack (WHS)	+0.106 ns
+Total Hold Slack (THS)	0.000 ns
+Hold failing endpoints	0
+Hold endpoints analyzed	163
+Worst Pulse Width Slack (WPWS)	+4.500 ns
+Total Pulse Width Negative Slack (TPWS)	0.000 ns
+Pulse-width failing endpoints	0
+Pulse-width endpoints analyzed	78
+
+Vivado reports that all user-specified timing constraints are met.
+Interpretation
+- Setup timing: The worst reported slack is positive at 2.858 ns, with no setup violations.
+- Hold timing: The worst reported hold slack is positive at 0.106 ns, with no hold violations. This is the smallest of the three reported timing margins.
+- Pulse-width timing: The worst pulse-width slack is positive at 4.500 ns, with no reported violations.
+- Overall: The design meets the timing constraints applied in this run.
+
+The FPGA implementation of the ring-oscillator-based true random number generator was evaluated using Vivado power estimation and static timing analysis. The estimated total on-chip power was 73 mW, comprising 1 mW of dynamic power and 72 mW of device static power. The reported junction temperature was 25.4 °C under a typical process corner, with a medium confidence level for the power estimate. Static timing analysis reported a worst setup slack of +2.858 ns, worst hold slack of +0.106 ns, and worst pulse-width slack of +4.500 ns. No setup, hold, or pulse-width failing endpoints were reported, and Vivado indicated that all user-specified timing constraints were met.

@@ -1,0 +1,120 @@
+CADENCE RTL-TO-GDS SUMMARY
+==========================
+Archive analyzed: cadence_reports.zip
+Design: trng_top
+Purpose: Capture post-route implementation metrics and evidence available in this archive.
+
+1. EXECUTIVE SUMMARY
+--------------------
+- A Cadence Innovus post-route report set is present, along with a GDS layout, synthesized netlist, post-route SDF, SDC constraints, and an Innovus saved-design restore script.
+- Reported top-level instance count: 679; reported total area: 4677.642 (the area unit is not printed in report_area_trng.rpt; confirm the library/report convention before assigning a unit in a paper).
+- Reported setup timing path slack: 6.009 ns for the shown Path 1 in slow_view. The timing report does not include a hold report or a cross-corner timing summary.
+- Reported post-route total power: 0.37239906 mW at 0.9 V, with the tool stating a 10 ns / 100 MHz clock. The activity assumptions are largely defaults, so this is an activity-assumption-dependent estimate, not a measured power value.
+- Physical deliverables are present, but no DRC/LVS report, die/core dimensions, detailed routing statistics, or explicit hold-slack summary is included.
+
+2. TOOLCHAIN, PROCESS, AND ANALYSIS CONDITIONS
+---------------------------------------------
+Item                         Reported value / evidence
+Design                       trng_top
+Implementation tool           Cadence Innovus 21.15-s110_1 (report_timing_trng.rpt header; report_power_trng.rpt)
+Synthesis/SDC generator       Genus 21.14-s082_1 (trng_sdc.sdc header)
+OS                            Linux x86_64 (timing-report header)
+Process/design mode           90 nm (report_power_trng.rpt: "Design Mode: 90nm")
+Timing/power library          /home/install/FOUNDRY/digital/90nm/dig/lib/slow.lib (slow_view)
+Supply                        vdd! = 0.9 V; gnd! = 0 V (report_power_trng.rpt)
+Power analysis                PostRoute; MMMC OCV; SPEF/RCDB parasitics; signal integrity on
+Timing analysis view          slow_view (report_timing_trng.rpt)
+Timing-report timestamp       Fri Oct 23 17:08:08 2026 (Innovus local time as recorded)
+Power-report timestamp        2026-Oct-23 17:06:51 (as recorded in report_power_trng.rpt)
+
+3. AREA AND CELL COUNTS
+-----------------------
+Metric                         Exact reported value             Source
+Top instance count             679                              report_area_trng.rpt
+Top total area                 4677.642                         report_area_trng.rpt
+Listed NAND cell instances     8 rows, each Inst Count = 1      report_area_trng.rpt
+Area per listed NAND instance  3.028 each                       report_area_trng.rpt
+
+Caveat: report_area_trng.rpt prints a column named "Total Area" but does not state the unit. Do not label 4677.642 as um^2 without confirming the library/report unit. The area file is short and only lists the top-level line plus the eight shown NAND instances; it is not a full categorized standard-cell statistics report.
+
+4. CLOCK AND TIMING CONSTRAINTS
+-------------------------------
+- SDC clock: create_clock -name clk -period 10.0 -waveform {0.0 5.0} on port clk. (trng_sdc.sdc)
+- Clock period: 10.0 ns; corresponding constraint frequency: 100 MHz (calculated as 1 / 10 ns).
+- Clock transition: 0.1 ns (the SDC sets its time unit to 1000 ps = 1 ns).
+- Setup uncertainty: 0.01 ns; hold uncertainty: 0.01 ns.
+- Input delay: rst_n maximum input delay = 1.0 ns.
+- Output delays: tx, health_fail, dbg_raw_bit, dbg_raw_valid each have 1.0 ns output delay.
+- False path: set_false_path -to [get_cells u_sampler_s0_reg]. The sampler target is therefore excluded from ordinary timing analysis to that endpoint as written in the SDC.
+- Clock-gating setup check is set to 0.0.
+
+Reported setup Path 1 (report_timing_trng.rpt):
+  Beginpoint: div_reg[5]/Q
+  Endpoint:   u_rct_cnt_reg[3]/D
+  Path group: clk; analysis view: slow_view
+  Required time: 9.962 ns
+  Arrival time:  3.953 ns
+  Slack time:    6.009 ns (reported)
+  Reported terms include setup = 0.199 ns, phase shift = 10.000 ns, uncertainty = 0.010 ns, and CPPR adjustment = 0.000 ns.
+
+Interpretation: the single reported setup path has positive slack against the stated 10 ns clock. This is not proof of timing closure at every corner, and no explicit hold slack or multi-corner summary is present in this archive.
+
+5. POST-ROUTE POWER
+-------------------
+Power unit printed in report: 1 mW. Analysis is PostRoute in slow_view.
+
+Power component            Reported value (mW)    Share
+Internal power             0.29085869             78.1040%
+Switching power            0.05784397             15.5328%
+Leakage power              0.02369641              6.3632%
+Total power                0.37239906            100.0000%
+
+Power group totals (rounded in report):
+- Sequential: total 0.255 mW (68.48%); internal 0.2293 mW, switching 0.01171 mW, leakage 0.01399 mW.
+- Combinational: total 0.05966 mW (16.02%); internal 0.03285 mW, switching 0.01748 mW, leakage 0.009337 mW.
+- Clock (combinational): total 0.05773 mW (15.5%); internal 0.02869 mW, switching 0.02866 mW, leakage 0.0003727 mW.
+- Macro and IO power are each reported as zero.
+- The reported highest-average-power instance is CTS_ccl_a_buf_00002 (CLKBUFX16) at 0.02889 mW; highest leakage instance is the same buffer at 0.0001864 mW.
+- Total capacitance: 4.61999e-12 F; total design instances: 679; instances missing power: 0; instances missing activity: 0.
+
+Power assumptions / limitations:
+- The report says no default input activity was set and defaults primary-input activity to 0.2; sequential-element activity is 0.2. No activity file or user-defined activity is listed.
+- It reports clk(100MHz), a 10 ns clock period, and a clock toggle rate of 200.0000 MHz. Preserve that distinction: the clock frequency constraint is 100 MHz, while 200 MHz is the toggle rate printed by the power tool.
+- Power is an estimated result under the reported switching/activity assumptions; no silicon measurement is present.
+
+6. OUTPUT FILES INCLUDED IN THE ZIP
+-----------------------------------
+Filename                  Size (bytes)   Purpose / evidence
+trng.gds                  656986         GDS layout file is present
+trng_netlist.v            66037          Gate-level netlist
+trng_postRoute.sdf        321827         Post-route delay annotation file
+trng_sdc.sdc              1099           Timing constraints
+report_area_trng.rpt      921            Area / instance report
+report_power_trng.rpt     9963           Post-route power report
+report_timing_trng.rpt    2504           Setup timing path report
+trng_finished.enc         572            Innovus saved-design restore script
+
+Note: trng_finished.enc refers to trng_finished.enc.dat in the same directory, but that .dat file is not included in the archive. The restore script is therefore not a self-contained saved database within this ZIP.
+
+7. MISSING DATA / ITEMS NOT VERIFIED
+------------------------------------
+- No DRC or LVS report is included; DRC/LVS status must be recorded as NOT PROVIDED, not as pass.
+- No hold timing report or hold slack is included.
+- No die/core dimensions, utilization, routed wire length, via count, routing-layer usage, antenna results, or IR-drop report is included.
+- No explicit temperature, detailed process corner name beyond slow_view/90 nm, or complete library/PDK identifier is recorded.
+- The ZIP includes a GDS, but no separate signoff summary is included to independently establish DRC/LVS cleanliness.
+- The archive does not include the RTL source files; it contains the gate-level netlist and the listed implementation artifacts.
+
+8. RESEARCH-PAPER NOTES
+-----------------------
+- Useful reportable values: 679 instances; area 4677.642 (unit must be confirmed); 10 ns / 100 MHz clock constraint; setup slack 6.009 ns on the reported path; post-route total power 0.37239906 mW at 0.9 V under default activity assumptions.
+- Do not characterize 100 MHz as a demonstrated maximum operating frequency: it is the SDC clock constraint.
+- Include the activity assumptions when reporting power. This Cadence estimate (90 nm, 0.9 V, slow_view) is not directly comparable with the OpenLane/Sky130 result without clearly noting the process, supply, libraries, timing constraints, and power assumptions.
+
+9. SOURCE-FILE TRACEABILITY
+---------------------------
+- report_area_trng.rpt: top-level instance count and area.
+- report_timing_trng.rpt: tool/version, worst displayed setup path, arrival/required times, slack, endpoint/beginpoint.
+- report_power_trng.rpt: process mode, supply, analysis mode, parasitics, activity assumptions, power breakdown, clock and instance statistics.
+- trng_sdc.sdc: clock, uncertainty, input/output delays, false path.
+- trng.gds, trng_netlist.v, trng_postRoute.sdf, trng_finished.enc: deliverable presence and sizes.

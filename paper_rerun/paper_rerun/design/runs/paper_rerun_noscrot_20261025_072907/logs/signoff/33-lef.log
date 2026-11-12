@@ -1,0 +1,270 @@
+
+Magic 8.3 revision 413 - Compiled on Wed Jul 12 10:04:40 UTC 2023.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm 
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Using technology "sky130A", version 1.0.493-0-g0fe599b
+Reading LEF data from file /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef.
+This action cannot be undone.
+LEF read, Line 82 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 83 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 116 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 118 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 119 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 125 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 126 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 127 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 160 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 168 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 169 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 171 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 172 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 173 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 210 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 211 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 213 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 214 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 215 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 252 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 253 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 255 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 256 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 257 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 294 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 295 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read: Processed 801 lines.
+Reading DEF data from file /openlane/designs/trng_top/paper_rerun/design/runs/paper_rerun_noscrot_20261025_072907/results/routing/trng_top.def.
+This action cannot be undone.
+  Processed 4 vias total.
+Cell sky130_fd_sc_hd__decap_3 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_ef_sc_hd__decap_12 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__decap_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__fill_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__decap_8 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__fill_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__decap_6 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__tapvpwrvgnd_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__buf_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__xnor2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__xor2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__inv_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nor2_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nand2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__buf_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and2b_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or3b_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o211a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or2_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o21a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or3_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__mux2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a22o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nor2_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and4bb_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o31a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a32o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or3b_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a31o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o211ai_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and3_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o311a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or4_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nand3_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or4b_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nand4_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or4_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21oi_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__buf_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and3b_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o21ai_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and3_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__xor2_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nor2b_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a31oi_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a31o_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nor3_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o221a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a211oi_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and4_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o32a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or4bb_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or4_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__or2b_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__and4_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o2bb2a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o22a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a2bb2o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nor4_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o41a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21o_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21oi_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a41o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o31ai_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21bo_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__nand2_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a221oi_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__o2111a_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a211o_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__a21boi_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dfxtp_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dfxtp_2 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dfrtp_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__conb_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dfrtp_4 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_16 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__clkbuf_8 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+Cell sky130_fd_sc_hd__dlygate4sd3_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+DEF read, Line 2449 (Warning): Character in instance name converted to underscore.
+Cell sky130_fd_sc_hd__inv_1 read from path /home/lufthansa/.ciel/sky130A/libs.ref/sky130_fd_sc_hd/mag
+DEF read, Line 2450 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2451 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2452 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2453 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2454 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2455 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2456 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2457 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2458 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2459 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2460 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2461 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2462 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2463 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2464 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2465 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2466 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2467 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2468 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2469 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2470 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2471 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2472 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2473 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2474 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2475 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2476 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2477 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2478 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2479 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2480 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2481 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2482 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2483 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2484 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2485 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2486 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2487 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2488 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2489 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2490 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2491 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2492 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2493 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2494 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2495 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2496 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2497 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2498 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2499 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2500 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2501 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2502 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2503 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2504 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2505 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2506 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2507 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2508 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2509 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2510 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2511 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2512 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2513 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2514 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2515 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2516 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2517 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2518 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2519 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2520 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2521 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2522 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2523 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2524 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2525 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2526 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2527 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2528 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2529 (Warning): Character in instance name converted to underscore.
+DEF read, Line 2530 (Warning): Character in instance name converted to underscore.
+  Processed 2454 subcell instances total.
+  Processed 8 pins total.
+  Processed 2 special nets total.
+  Processed 963 nets total.
+DEF read: Processed 16694 lines.
+DEF Read: encountered 82 warnings total.
+Moving label "_0008_" from metal1 to via1 in cell trng_top.
+Moving label "_0067_" from metal1 to via1 in cell trng_top.
+Moving label "_0073_" from metal1 to via1 in cell trng_top.
+Moving label "_0080_" from metal1 to via1 in cell trng_top.
+Moving label "_0086_" from metal1 to via1 in cell trng_top.
+Moving label "_0094_" from metal1 to via1 in cell trng_top.
+Moving label "_0099_" from metal1 to via1 in cell trng_top.
+Moving label "_0101_" from metal1 to via1 in cell trng_top.
+Moving label "_0108_" from metal1 to via1 in cell trng_top.
+Moving label "_0115_" from metal1 to viali in cell trng_top.
+Moving label "_0120_" from metal1 to viali in cell trng_top.
+Moving label "_0122_" from metal1 to via1 in cell trng_top.
+Moving label "_0125_" from metal1 to via1 in cell trng_top.
+Moving label "_0128_" from metal1 to via1 in cell trng_top.
+Moving label "_0134_" from metal1 to via1 in cell trng_top.
+Moving label "_0140_" from metal1 to via1 in cell trng_top.
+Moving label "_0143_" from metal1 to via1 in cell trng_top.
+Moving label "_0178_" from metal1 to via1 in cell trng_top.
+Moving label "_0194_" from metal1 to via1 in cell trng_top.
+Moving label "_0276_" from metal1 to viali in cell trng_top.
+Moving label "_0313_" from metal1 to via1 in cell trng_top.
+Moving label "_0434_" from metal2 to via2 in cell trng_top.
+Moving label "_0568_" from metal1 to via1 in cell trng_top.
+Moving label "_0583_" from metal1 to viali in cell trng_top.
+Moving label "_0589_" from metal2 to via1 in cell trng_top.
+Moving label "_0604_" from metal1 to via1 in cell trng_top.
+Moving label "clknet_0_clk" from metal2 to via2 in cell trng_top.
+Moving label "net31" from metal1 to viali in cell trng_top.
+Moving label "net34" from metal2 to via1 in cell trng_top.
+Moving label "net67" from metal1 to viali in cell trng_top.
+Moving label "u_ro_bank.g_ro\[2\].u_ro.n\[1\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[3\].u_ro.n\[2\]" from metal1 to viali in cell trng_top.
+Moving label "u_ro_bank.g_ro\[4\].u_ro.n\[1\]" from metal1 to viali in cell trng_top.
+Moving label "u_ro_bank.g_ro\[4\].u_ro.n\[7\]" from metal1 to viali in cell trng_top.
+Moving label "u_ro_bank.g_ro\[4\].u_ro.n\[8\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[5\].u_ro.n\[10\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[5\].u_ro.n\[8\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[5\].u_ro.n\[9\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[6\].u_ro.n\[10\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[6\].u_ro.n\[2\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[6\].u_ro.n\[4\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[6\].u_ro.n\[5\]" from metal1 to via1 in cell trng_top.
+Moving label "u_ro_bank.g_ro\[7\].u_ro.n\[12\]" from metal1 to via1 in cell trng_top.
+Moving label "u_uart.shreg\[7\]" from metal1 to via1 in cell trng_top.
+Moving label "u_uart.tx_data\[3\]" from metal1 to via1 in cell trng_top.
+[INFO]: Writing abstract LEF
+Generating LEF output /openlane/designs/trng_top/paper_rerun/design/runs/paper_rerun_noscrot_20261025_072907/results/signoff/trng_top.lef for cell trng_top:
+Diagnostic:  Write LEF header for cell trng_top
+Diagnostic:  Writing LEF output for cell trng_top
+Diagnostic:  Scale value is 0.005000
+[INFO]: LEF Write Complete

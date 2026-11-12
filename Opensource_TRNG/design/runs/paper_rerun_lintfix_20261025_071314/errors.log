@@ -1,0 +1,19 @@
+[ERROR]: during executing: "bash /openlane/scripts/klayout/scrotLayout.sh /home/lufthansa/.ciel/sky130A/libs.tech/klayout/tech/sky130A.lyt /openlane/designs/trng_top/paper_rerun/design/runs/paper_rerun_lintfix_20261025_071314/tmp/floorplan/5-tapcell.def |& tee >&@stdout /openlane/designs/trng_top/paper_rerun/design/runs/paper_rerun_lintfix_20261025_071314/logs/floorplan/6-screenshot.log"
+[ERROR]: Exit code: 1
+[ERROR]: Last 10 lines:
+child process exited abnormally
+
+[ERROR]: Step 6 (floorplan) failed with error:
+-code 1 -level 0 -errorcode NONE -errorinfo {
+    while executing
+"throw_error"
+    (procedure "try_exec" line 17)
+    invoked from within
+"try_exec bash $::env(SCRIPTS_DIR)/klayout/scrotLayout.sh $::env(KLAYOUT_TECH) $arg_values(-layout) |& tee $::env(TERMINAL_OUTPUT) $log"
+    (procedure "scrot_klayout" line 17)
+    invoked from within
+"scrot_klayout -layout $::env(CURRENT_DEF) -log $::env(floorplan_logs)/screenshot.log"
+    (procedure "run_floorplan" line 54)
+    invoked from within
+"run_floorplan"} -errorline 1
+[ERROR]: Flow failed.
