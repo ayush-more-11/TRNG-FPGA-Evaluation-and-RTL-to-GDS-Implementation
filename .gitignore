@@ -1,0 +1,43 @@
+# OS/editor files
+.DS_Store
+*.swp
+*.swo
+
+# Simulation outputs
+*.vcd
+*.wlf
+*.jou
+*.str
+*.log
+trng_sim
+*.out
+work/
+build/
+sim/
+
+# Vivado generated state
+.Xil/
+.cache/
+*.runs/
+*.gen/
+*.hw/
+*.ip_user_files/
+
+# OpenLane and local implementation runs
+OpenLane/
+openlane_runs/
+*.enc.dat
+*.spef
+*.sdf
+*.def
+*.lef
+*.odb
+*.db
+*.sqlite
+
+# Local credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
