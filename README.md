@@ -44,8 +44,6 @@ A 100 MHz clock constraint was used. All reported setup, hold, and pulse-width e
 
 ### SKY130 ASIC — OpenLane
 
-![90 nm GDSII layout](results/cadence/gds_layout.png)
-
 | Metric | Result |
 |---|---:|
 | Process / library | SKY130A / sky130_fd_sc_hd |
@@ -56,9 +54,11 @@ A 100 MHz clock constraint was used. All reported setup, hold, and pulse-width e
 | Magic DRC | 0 violations |
 | LVS | 0 mismatches |
 
-The layout image above is an implementation view of a separate Cadence 90 nm run; the SKY130 GDSII deliverable is available in the repository as `trng_layout.gds`.
+The SKY130 GDSII deliverable is [`trng_layout.gds`](openlane/physical/trng_layout.gds).
 
 ### 90 nm ASIC — Cadence
+
+![90 nm GDSII layout](results/cadence/gds_layout.png)
 
 | Metric | Result |
 |---|---:|
