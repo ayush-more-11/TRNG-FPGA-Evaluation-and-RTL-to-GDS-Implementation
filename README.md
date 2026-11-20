@@ -1,88 +1,112 @@
 # Ring-Oscillator True Random Number Generator
 
-A hardware true random number generator (TRNG) designed in Verilog and carried from RTL through FPGA implementation and ASIC physical design.
+A complete hardware TRNG project, starting from ring-oscillator RTL and extending through FPGA implementation, statistical testing, and ASIC physical design.
 
 ![TRNG architecture](figures/fig_pipeline.png)
 
-## What This Project Builds
+## Overview
 
-Eight ring oscillators produce raw jitter-based transitions. Their combined output passes through asynchronous sampling, health monitoring, bit conditioning, byte packing, and UART transmission:
+The design generates raw random transitions with eight ring oscillators, combines them with XOR logic, captures them through a 2-flop asynchronous sampler, applies RCT and APT health checks, performs Von Neumann debiasing, packs output bytes, and transmits the result through UART.
 
-**Ring oscillators → XOR → 2-flop sampler → RCT/APT health checks → Von Neumann corrector → UART**
+**Ring oscillators → XOR → asynchronous sampler → health checks → Von Neumann correction → byte packer → UART 8-N-1**
 
-The project connects three workflows:
+The project demonstrates the complete digital flow across FPGA and ASIC implementations:
 
-- **FPGA:** Xilinx Vivado implementation and timing/power analysis
-- **SKY130 ASIC:** OpenLane synthesis and place-and-route
-- **90 nm ASIC:** Cadence Genus/Innovus implementation
+- **FPGA:** Verilog implementation, simulation, synthesis, timing, and power analysis with Xilinx Vivado
+- **SKY130 ASIC:** RTL-to-GDSII implementation using OpenLane
+- **90 nm ASIC:** Post-route implementation using Cadence Genus and Innovus
+- **Randomness validation:** NIST SP 800-22 statistical testing
 
 ## Architecture
 
-| Stage | Purpose |
+| Block | Function |
 |---|---|
-| Ring-oscillator bank | Generates an entropy source from oscillator jitter |
-| XOR and asynchronous sampler | Combines oscillator transitions and captures raw samples |
-| RCT and APT health checks | Monitors repetition and adaptive-proportion behavior |
-| Von Neumann corrector | Removes simple first-order pairing bias |
-| Byte packer | Forms output bytes from accepted random bits |
-| UART 8-N-1 | Transmits random bytes to an external system |
+| Ring-oscillator bank | Generates jitter-driven transitions |
+| XOR combiner | Combines the oscillator outputs |
+| 2-flop sampler | Captures asynchronous transitions |
+| RCT / APT | Monitors repetition and adaptive-proportion health |
+| Von Neumann corrector | Reduces simple pairing bias |
+| Byte packer | Produces 8-bit output values |
+| UART transmitter | Sends output serially with 8-N-1 framing |
 
-## Implementation Results
+## FPGA Implementation
 
-### FPGA — Xilinx Vivado
+The FPGA design was simulated and implemented with Xilinx Vivado.
 
-![FPGA simulation](results/vivado/fpga_simulation.png)
+![FPGA RTL simulation](results/vivado/fpga_simulation.png)
 
 | Metric | Result |
 |---|---:|
 | Worst setup slack | +2.858 ns |
 | Worst hold slack | +0.106 ns |
 | Worst pulse-width slack | +4.500 ns |
-| Total on-chip power | 73 mW, estimated |
+| Setup / hold / pulse-width violations | 0 / 0 / 0 |
+| Estimated on-chip power | 73 mW |
 
-A 100 MHz clock constraint was used. All reported setup, hold, and pulse-width endpoints met their constraints in this run.
+The FPGA run used a 100 MHz clock constraint. The power value is an estimate from Vivado, not a board-level measurement.
 
-### SKY130 ASIC — OpenLane
+## SKY130 ASIC Implementation
+
+The RTL-to-GDSII flow was completed for the SKY130A process with the `sky130_fd_sc_hd` standard-cell library.
+
+![OpenLane RTL simulation](results/OpenLane/rtl_simulation.png)
+
+The behavioral simulation displays reset, ring-oscillator activity, RCT/APT health monitoring, byte packing, and UART byte transmission.
 
 | Metric | Result |
 |---|---:|
 | Process / library | SKY130A / sky130_fd_sc_hd |
 | Clock constraint | 10 ns / 100 MHz |
-| Final setup / hold slack | +5.86 ns / +0.29 ns |
-| Final utilization | 47.77% |
+| Setup / hold slack | +5.86 ns / +0.29 ns |
+| Core utilization | 47.77% |
 | Typical-corner power | 1.34 mW |
-| Magic DRC | 0 violations |
-| LVS | 0 mismatches |
+| Magic DRC violations | 0 |
+| LVS mismatches | 0 |
 
-The SKY130 GDSII deliverable is [`trng_layout.gds`](openlane/physical/trng_layout.gds).
+### Layout and Verification Views
 
-### 90 nm ASIC — Cadence
+The final SKY130 layout and its KLayout and Magic views are included with the project:
+
+![Final SKY130 GDSII layout](results/OpenLane/final_gds_layout.png)
+
+| View | Description |
+|---|---|
+| ![KLayout](results/OpenLane/klayout_view.png) | KLayout view of the final GDSII |
+| ![Magic DRC](results/OpenLane/magic_drc.png) | Magic DRC and layer view |
+
+The 100 MHz value is the design constraint, not a demonstrated maximum operating frequency.
+
+## 90 nm ASIC Implementation
+
+A separate implementation was carried through synthesis and place-and-route with Cadence Genus and Innovus.
 
 ![90 nm GDSII layout](results/cadence/gds_layout.png)
 
 | Metric | Result |
 |---|---:|
-| Tools | Genus 21.14 / Innovus 21.15 |
 | Process / supply | 90 nm / 0.9 V |
+| Tools | Genus 21.14 / Innovus 21.15 |
 | Top-level instances | 679 |
 | Reported setup slack | +6.009 ns |
 | Post-route power | 0.37239906 mW, estimated |
 
-## NIST SP 800-22 Evaluation
+The Cadence power value assumes the default activity settings used by the post-route power run. The archived set does not include a hold report or DRC/LVS signoff, so these items are not claimed here.
 
-The captured statistical testing campaign processed:
+## NIST SP 800-22 Statistical Testing
+
+The captured campaign processed:
 
 - **55 binary bitstreams**
 - **1,000,000 bits per stream**
 - **55,000,000 bits in total**
 
-The Frequency, Block Frequency, Cumulative Sums, Longest Run, FFT, Universal, Serial, and Linear Complexity families all reported 55/55 passes in the captured table. One NonOverlapping Template row was reported at 51/55, below the approximate 52/55 proportion threshold.
+The Frequency, Block Frequency, Cumulative Sums, Longest Run, FFT, Universal, Serial, and Linear Complexity families reported 55/55 passes in the captured table. One NonOverlapping Template row reported 51/55, below the approximate 52/55 proportion threshold.
 
-NIST SP 800-22 is used here as statistical screening rather than as proof of an entropy source or certification of cryptographic suitability.
+NIST SP 800-22 provides statistical screening. It does not by itself certify the entropy source or establish cryptographic suitability.
 
-## Reproduce the Functional Simulation
+## Run the Functional Simulation
 
-Icarus Verilog:
+Using Icarus Verilog:
 
 ```bash
 iverilog -g2012 -DTRNG_BEHAV_SIM -s tb_trng_top \
@@ -91,16 +115,14 @@ iverilog -g2012 -DTRNG_BEHAV_SIM -s tb_trng_top \
 vvp trng_sim
 ```
 
-This command performs a functional behavioral check. It does not model physical entropy or establish randomness quality.
+This is a behavioral RTL check. It confirms datapath and control behavior but does not model physical entropy or prove statistical randomness.
 
-OpenLane reruns require SKY130A PDK support. Cadence reruns require matching Genus/Innovus libraries and licenses.
+## Key Files
 
-## Project Files
-
-- [`rtl/trng_top.v`](rtl/trng_top.v) — FPGA Verilog implementation
-- [`openlane/src/trng_top.v`](openlane/src/trng_top.v) — SKY130 physical-design RTL
-- [`openlane/physical/trng_layout.gds`](openlane/physical/trng_layout.gds) — SKY130 GDSII layout
-- [`results/nist/nist_sp80022_summary.txt`](results/nist/nist_sp80022_summary.txt) — NIST campaign summary
+- [`rtl/trng_top.v`](rtl/trng_top.v) — FPGA implementation
+- [`openlane/src/trng_top.v`](openlane/src/trng_top.v) — SKY130 implementation RTL
+- [`openlane/physical/trng_layout.gds`](openlane/physical/trng_layout.gds) — final SKY130 GDSII
+- [`results/nist/nist_sp80022_summary.txt`](results/nist/nist_sp80022_summary.txt) — statistical-testing summary
 
 ## License
 
